@@ -5,7 +5,16 @@ const port=8000;
 
 const app=express();
 
-const db=require('./config/mongoose');
+// const db=require('./config/mongoose');
+
+
+const mongoose=require('mongoose');
+mongoose.connect("mongodb+srv://viradiyatanvi028:UPsbqZOcMIvE8vEB@cluster0.sk3ly.mongodb.net/adminpanelsetup?retryWrites=true&w=majority&appName=Cluster0").then((res)=>{
+    console.log("db is connected");
+})
+.catch((err)=>{
+    console.log(err);
+})
 
 const cookieparser=require('cookie-parser');
 
