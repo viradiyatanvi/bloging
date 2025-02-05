@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Page</title>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        td {
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input[type="text"], input[type="date"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: rgb(34, 117, 199);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        table tr td:first-child {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../header') %>
+
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Add Category</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add Category</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <!-- <div class="app-content"> -->
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <!-- <div class="row"> -->
+              <!-- <div class="col-md-6"> -->
+                <!-- <div class="card mb-4"> -->
+                  <!-- <div class="card-header"><h3 class="card-title">Bordered Table</h3></div> -->
+                  <!-- /.card-header -->
+                  <!-- <div class="card-body"> -->
+    <h1>Add Category</h1>
+    <!-- <% if(locals.flash.success.length>0 ){ %>
+        <div class="alert alert-success">
+          <%= locals.flash.success %>
+        </div>
+      <% } %> -->
+    <form action="/category/insertcategory" method="post">
+        <table>
+            <tr>
+                <td>Enter Category Name:</td>
+                <td><input type="text" name="categoryname" placeholder="Enter category name" value="<% if(old && old.categoryname){ %><%= old.categoryname %><% } %>">
+                  <% if(errorsData && errorsData.categoryname){ %>
+                    <span style="color: red;"><%= errorsData.categoryname.msg %></span>
+                  <% } %>
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>Enter Category Status:</td>
+                <td><input type="text" name="categorystatus" placeholder="Enter category status"></td>
+            </tr> -->
+            <!-- <tr>
+                <td>Enter BlogId:</td>
+                <td><input type="text" name="blogid" placeholder="Enter blog ID"></td>
+            </tr> -->
+            <!-- <tr>
+                <td>Enter Category Date:</td>
+                <td><input type="date" name="categorydate"></td>
+            </tr> -->
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</div>
+<!--end::Container-->
+<!-- </div> -->
+<!--end::App Content-->
+</main>
+<!--end::App Main-->
+<!--begin::Footer-->
+
+
+<%- include('../footer') %>
+</html>

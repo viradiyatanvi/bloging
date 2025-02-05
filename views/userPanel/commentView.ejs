@@ -1,0 +1,142 @@
+<%- include('../header') %>
+
+<style>
+    
+.container-fluid {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.comment-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.comment-container:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Comment */
+.comment-container img {
+  border-radius: 10px;
+  margin-right: 20px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.comment-details h2 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.comment-details p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+</style>
+<main class="app-main">
+    <!--begin::App Content Header-->
+    <div cl ass="app-content-header">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row">
+          <div class="col-sm-6"><h3 class="mb-0">Comment Page</h3></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-end">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
+            </ol>
+          </div>
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <div class="container-fluid">
+    <!--end::App Content Header-->
+    <!--begin::App Content-->
+    <!-- <div class="app-content"> -->
+      <!--begin::Container-->
+      
+
+<div>
+    <h1 style="text-align: center;">Comment Section</h1>
+    <% viewComment.map((v, i) => { %>
+        <div class="comment-container">
+            <img src="<%= v.image %>"  height="200px" alt="Comment Image">
+
+            <div class="comment-details">
+                <h2><%= v.name %></h2>
+                <p>Email: <%= v.email %></p>
+                <p>Comment: <%= v.comment %></p>
+
+                <% if (v.blogstatus) { %>
+                    <a href="/changeStatusTrue/?camId=<%= v.id %>&status=true" class="btn btn-success">Active</a>
+                <% } else { %>
+                    <a href="/changeStatusFalse/?camId=<%= v.id %>&status=false" class="btn btn-danger">Inactive</a>
+                <% } %>
+            </div>
+        </div>
+    <% }) %>
+</div>
+</div>
+<!--end::Container-->
+<!-- </div> -->
+<!--end::App Content-->
+</main>
+<!--end::App Main-->
+<!--begin::Footer-->
+
+
+<%- include('../footer') %>

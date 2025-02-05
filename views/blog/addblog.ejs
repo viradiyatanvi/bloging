@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Page</title>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        td {
+            padding: 15px;
+            font-size: 14px;
+            color: #555;
+            vertical-align: middle;
+        }
+
+        input[type="text"], input[type="date"], input[type="file"], select, input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: rgb(34, 117, 199);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        table tr td:first-child {
+            font-weight: bold;
+        }
+
+        select {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../header') %>
+
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Add Blog</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add Blog</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <!-- <div class="app-content"> -->
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <!-- <div class="row"> -->
+              <!-- <div class="col-md-6"> -->
+                <!-- <div class="card mb-4"> -->
+                  <!-- <div class="card-header"><h3 class="card-title">Bordered Table</h3></div> -->
+                  <!-- /.card-header -->
+                  <!-- <div class="card-body"> -->
+    <h1>Add Blog</h1>
+    <form action="/blog/insertblog" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>Enter Category:</td>
+                <td>
+                    <select name="categoryId" id="">
+                        <option value="">-- Select Category --</option>
+                        <% categorydata.map((v, i) => { %>
+                            <option value="<%= v.id %>" <% if(old && old.categoryId){ if(old.categoryId==v.id){ %>
+                                <%= 'selected' %>
+                              <% }} %>
+                              ><%= v.categoryname %></option>
+                        <% }) %>
+                    </select>
+                    <% if(errorsData && errorsData.categoryId){ %>
+                        <span style="color: red;"><%= errorsData.categoryId.msg %></span>
+                      <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Title:</td>
+                <td><input type="text" name="title" placeholder="Enter blog title" value="<% if(old && old.title){ %><%= old.title %><% } %>">
+                    <% if(errorsData && errorsData.title){ %>
+                        <span style="color: red;"><%= errorsData.title.msg %></span>
+                      <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Description:</td>
+                <td><textarea name="discription" id=""><% if(old && old.discription){ %><%= old.discription %><% } %></textarea>
+                    <% if(errorsData && errorsData.discription){ %>
+                        <span style="color: red;"><%= errorsData.discription.msg %></span>
+                      <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Image:</td>
+                <td><input type="file" name="image"></td>
+            </tr>
+            <!-- <tr>
+                <td>Enter Status:</td>
+                <td><input type="text" name="blogstatus" placeholder="Enter blog status"></td>
+            </tr> -->
+            <!-- <tr>
+                <td>Enter Date:</td>
+                <td><input type="date" name="blogdate"></td>
+            </tr> -->
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</div>
+<!--end::Container-->
+<!-- </div> -->
+<!--end::App Content-->
+</main>
+<!--end::App Main-->
+<!--begin::Footer-->
+
+
+<%- include('../footer') %>
+</html>
+
+<script src="https://cdn.tiny.cloud/1/k24c3g0hrsprr86emomzn2z5kb7wsx5yi6rzrx5m7l0419dx/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: [
+      // Core editing features
+      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+      // Your account includes a free trial of TinyMCE premium features
+      // Try the most popular premium features until Feb 5, 2025:
+      'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+    ],
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+  });
+</script>

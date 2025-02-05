@@ -1,0 +1,219 @@
+<%- include('header') %>
+
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Admin Form</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Admin Form</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row g-4">
+              <!--begin::Col-->
+              
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6">
+                <!--begin::Quick Example-->
+                <div class="card card-primary card-outline mb-4">
+                  <!--begin::Header-->
+                  <div class="card-header"><div class="card-title">Admin Form</div></div>
+                  <!--end::Header-->
+                  <!--begin::Form-->
+                  <form class="form-horizontal" action="/editdata" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="empid" value="<%= singleObj.id %>">
+                    <!--begin::Body-->
+                    <div class="card-body">
+
+                      <!-- fname -->
+                      <%
+                      const [fname, lname] = singleObj.name.split(' '); 
+                  %>
+                      <div class="col-md-6">
+                        <label for="validationCustom01" class="form-label">First name :</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="validationCustom01"
+                          name="fname"
+                          value="<%= fname %>"
+                        />
+                        <div class="valid-feedback">Looks good!</div>
+                      </div>
+
+                      <!-- lname -->
+                      <div class="col-md-6">
+                        <label for="validationCustom02" class="form-label">Last name :</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="validationCustom02"
+                          name="lname"
+                          value="<%= lname %>"
+                        />
+                        <div class="valid-feedback">Looks good!</div>
+                      </div>
+
+                     
+
+                      <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address:</label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          name="email"
+                          aria-describedby="emailHelp"
+                          value="<%= singleObj.email %>"
+                        />
+                        <div id="emailHelp" class="form-text">
+                          We'll never share your email with anyone else.
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password :</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="<%= singleObj.password %>"/>
+                      </div>
+
+                       <!-- gender -->
+                       <fieldset class="row mb-3">
+                        <legend class="col-form-label col-sm-2 pt-0">gender:</legend>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gender"
+                              id="gridRadios1"
+                              value="male"
+                              <% if(singleObj.gender=='male'){ %>
+                                <%= 'checked' %>
+                            <% } %>
+                            />
+                            <label class="form-check-label" for="gridRadios1">male</label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gender"
+                              id="gridRadios2"
+                              value="female"
+                              <% if(singleObj.gender=='female'){ %>
+                                <%= 'checked' %>
+                            <% } %>
+                            />
+                            <label class="form-check-label" for="gridRadios2">female</label>
+                          </div>
+                        </div>
+                      </fieldset>
+                      
+                      <!-- hobby -->
+                      <div class="mb-3"></div>
+                      <label for="exampleInputEmail1" class="form-label">Hobby :</label>
+                        <div class=" form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="hobby" value="reading" 
+                          <% if(singleObj.hobby.includes('reading')){ %>
+                            <%= 'checked' %>
+                        <% } %>
+                          />
+                          <label class="form-check-label" for="exampleCheck1">reading</label>
+                        </div>
+                        <div class=" form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="hobby" value="playing" 
+                          <% if(singleObj.hobby.includes('playing')){ %>
+                            <%= 'checked' %>
+                        <% } %>
+                          />
+                          <label class="form-check-label" for="exampleCheck1">playing</label>
+                        </div>
+                        <div class=" form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="hobby" value="coding" 
+                          <% if(singleObj.hobby.includes('coding')){ %>
+                            <%= 'checked' %>
+                        <% } %>
+                          />
+                          <label class="form-check-label" for="exampleCheck1">coding</label>
+                        </div>
+                      </div>
+
+                      <!-- selectcity -->
+                      <div class="col-md-6 form-label" style="margin-left: 15px;">
+                        <% var states=['gujarat','goa','panjab']; %>
+                        <label for="validationCustom04" class="form-label">Select State :</label>
+                        <select class="form-select" id="validationCustom04" name="state">
+                          <option selected disabled>...</option>
+                          <% states.map((v,i)=>{ %> 
+                            <option value="<%= v %>"
+                                <% if(singleObj.state==v){ %>
+                                <%= 'selected' %>
+                            <% } %>
+                                ><%= v %></option>
+                          <% }) %>
+                        </select>
+                      </div>
+
+                      <!-- img -->
+                      <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="inputGroupFile02" name="image"/>
+                        <img src="<%= singleObj.image %>" width="100px" height="100px" style="border-radius: 10px;" alt="">
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                      </div>
+
+                      
+
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+
+                    </div>
+                    <!--end::Body-->
+                    <!--begin::Footer-->
+                    
+                    <!--end::Footer-->
+                  </form>
+                  <!--end::Form-->
+                </div>
+                <!--end::Quick Example-->
+                
+                <!--end::Input Group-->
+                <!--begin::Horizontal Form-->
+               
+                <!--end::Horizontal Form-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              
+              <!--end::Col-->
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+      <!--begin::Footer-->
+      
+
+<%- include('footer') %>

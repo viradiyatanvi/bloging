@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        td:first-child {
+            font-weight: bold;
+            text-align: right;
+            width: 40%;
+            color: #555;
+        }
+
+        td:last-child {
+            text-align: left;
+        }
+
+        select, input[type="text"], input[type="date"], input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        img {
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        input[type="file"] {
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('../header') %>
+
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Edit Blog</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <!-- <div class="app-content"> -->
+          <!--begin::Container-->
+          <div class="container-fluid">
+    <h1>Edit Blog</h1>
+    <form action="/blog/editblog" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="bid" value="<%= singleobj.id %>">
+        <table>
+            <tr>
+                <td>Enter Category:</td>
+                <td>
+                    <select name="categoryId" id="">
+                        <option value="">--select category--</option>
+                        <% categorydata.map((v, i) => { %>
+                            <option value="<%= v.id %>" 
+                                <% if(singleobj.categoryId == v.id) { %>
+                                <%= 'selected' %>
+                                <% } %>>
+                                <%= v.categoryname %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Title:</td>
+                <td><input type="text" name="title" value="<%= singleobj.title %>"></td>
+            </tr>
+            <tr>
+                <td>Enter Description:</td>
+                <td><textarea name="discription" id=""><%- singleobj.discription %></textarea></td>
+            </tr>
+            <tr>
+                <td>Enter Image:</td>
+                <td>
+                    <input type="file" name="image">
+                    <img src="<%= singleobj.image %>" width="100px" height="100px" alt="">
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>Enter Status:</td>
+                <td><input type="text" name="status" value="<%= singleobj.status %>"></td>
+            </tr>
+            <tr>
+                <td>Enter Date:</td>
+                <td><input type="date" name="blogdate" value="<%= singleobj.blogdate %>"></td>
+            </tr> -->
+            <tr>
+                <td></td>
+                <td><input type="submit" name="submit" value="Update"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<!--end::Container-->
+<!-- </div> -->
+<!--end::App Content-->
+</main>
+<!--end::App Main-->
+<!--begin::Footer-->
+
+
+<%- include('../footer') %>
+</body>
+
+</html>
+
+<script src="https://cdn.tiny.cloud/1/k24c3g0hrsprr86emomzn2z5kb7wsx5yi6rzrx5m7l0419dx/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: [
+      // Core editing features
+      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+      // Your account includes a free trial of TinyMCE premium features
+      // Try the most popular premium features until Feb 5, 2025:
+      'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+    ],
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+  });
+</script>

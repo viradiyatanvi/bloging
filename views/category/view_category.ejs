@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Category</title>
+    <style>
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #444;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        form input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 30px auto;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .pagination a {
+            text-decoration: none;
+        }
+
+        /* sorting */
+
+        .sorting-form {
+        display: flex;
+        align-items: center;
+        gap: 10px; 
+        margin: 20px 0;
+    }
+
+    .sorting-form select {
+        padding: 8px 12px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+
+    .sorting-form button {
+        padding: 8px 16px;
+        font-size: 1em;
+        color: white;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .sorting-form button:hover {
+        background-color: #034b97; 
+    }
+
+
+    </style>
+</head>
+<body>
+    <%- include('../header') %>
+
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Category List</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Category List</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="container-fluid">
+    <h1>Category List</h1>
+    <form action="" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0;">
+        <input type="text" name="search" placeholder="Search blog by title or author" style="padding: 10px; width: 250px; border: 1px solid #ccc; border-radius: 4px;">
+        <input type="submit" value="Search" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        <a href="/category/view_category">
+            <button type="button" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Reset</button>
+        </a>
+    </form>
+
+    <form class="sorting-form" action="/category/sorting" method="get">
+        <select name="sorting" id="sorting">
+            <option value="">--sorting--</option>
+            <option value="Asc">Ascending</option>
+            <option value="Desc">Descending</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+    
+    
+
+    <form action="/category/deleteMultipleDelete" method="post">
+    
+    <table>
+        <tr>
+            <th>
+                <input type="checkbox" id="checkAll">
+                <button type="submit" id="deleteAll" style="border: none;"><i class="bi bi-trash3 btn btn-danger" style="border: none;"></i></button>
+            </th>
+            <th>No</th>
+            <th>Name</th>
+            <th>Status</th>
+            <!-- <th>Date</th> -->
+        </tr>
+        <% viewCategory.map((v, i) => { %>
+            <tr>
+                <td>
+                    <input type="checkbox" name="Ids" value="<%= v.id %>">
+                </td>
+                <td><%= i=i+1 %></td>
+                <td><%= v.categoryname %></td>
+                <td>
+                    <% if(v.categorystatus){ %>
+                        <a href="/category/changeStatusTrue/?catId=<%= v.id %>&status=true" class="btn btn-success">Active</a>
+                    <% } else{ %>
+                        <a href="/category/changeStatusFalse/?catId=<%= v.id %>&status=false" class="btn btn-danger">Dactive</a>
+                    <% } %>
+                </td>
+                <!-- <td><%= v.categorystatus %></td> -->
+                <!-- <td><%= v.categorydate %></td> -->
+            </tr>   
+         
+        <% }) %>
+    </table>
+</form>
+
+    <div class="pagination">
+        <% if (parseInt(page) > 0) { %>
+            <a href="/category/view_category?page=<%= parseInt(page) - 1 %>">
+                <button>Previous</button>
+            </a>
+        <% } else { %>
+            <button disabled>Previous</button>
+        <% } %>
+
+        <% for (var i = 0; i < totalCount; i++) { %>
+            <a href="?page=<%= i %>">
+                <button><%= i + 1 %></button>
+            </a>
+        <% } %>
+        
+        <% if (parseInt(page) < totalCount - 1) { %>
+            <a href="/category/view_category?page=<%= parseInt(page) + 1 %>">
+                <button>Next</button>
+            </a>
+        <% } else { %>
+            <button disabled>Next</button>
+        <% } %>
+    </div>
+    
+
+</body>
+
+</div>
+<!--end::Container-->
+<!-- </div> -->
+<!--end::App Content-->
+</main>
+<!--end::App Main-->
+<!--begin::Footer-->
+
+
+<%- include('../footer') %>
+</html>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+
+    // butten
+
+    $("#deleteAll").hide();
+
+    $("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+    $("#deleteAll").toggle();
+    });
+</script>

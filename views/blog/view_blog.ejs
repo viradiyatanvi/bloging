@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Page</title>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        form input[type="text"] {
+            width: 250px;
+            padding: 10px;
+            margin-right: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        a button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        td img {
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .pagination button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* sorting */
+
+        .sorting-form {
+        display: flex;
+        align-items: center;
+        gap: 10px; 
+        margin: 20px 0;
+    }
+
+    .sorting-form select {
+        padding: 8px 12px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+
+    .sorting-form button {
+        padding: 8px 16px;
+        font-size: 1em;
+        color: white;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .sorting-form button:hover {
+        background-color: #034b97; 
+    }
+
+    </style>
+</head>
+<body>
+    <%- include('../header') %>
+
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">View Blog</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">View Blog</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <!-- <div class="app-content"> -->
+          <!--begin::Container-->
+          <div class="container-fluid">
+    <h1>View Blog</h1>
+    <form action="" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0;">
+        <input type="text" name="search" placeholder="Search blog by title or author" style="padding: 10px; width: 250px; border: 1px solid #ccc; border-radius: 4px;">
+        <input type="submit" value="Search" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        <a href="/blog/view_blog">
+            <button type="button" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Reset</button>
+        </a>
+    </form>
+    <form class="sorting-form" action="/blog/sorting" method="get">
+        <select name="sorting" id="sorting">
+            <option value="">--sorting--</option>
+            <option value="Asc">Ascending</option>
+            <option value="Desc">Descending</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+
+    <form action="/blog/deleteMultipleDelete" method="post">
+    
+    <table>
+        <tr>
+            <th>
+                <input type="checkbox" id="checkAll">
+                <button type="submit" id="deleteAll" style="border: none;"><i class="bi bi-trash3 btn btn-danger" style="border: none;"></i></button>
+            </th>
+            <th>No</th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Status</th>
+            <!-- <th>Blog Date</th> -->
+            <th>Action</th>
+        </tr>
+        <% blogData.map((v, i) => { %>
+            <tr>
+                <td>
+                    <input type="checkbox" name="Ids" value="<%= v.id %>">
+                </td>
+                <td><%= i=i+1 %></td>
+                <td><%= v.categoryId.categoryname %></td>
+                <td><%= v.title %></td>
+                <td><%- v.discription %></td>
+                <td><img src="<%= v.image %>" width="100" height="100" alt="Blog Image"></td>
+                <!-- <td><%= v.blogstatus %></td> -->
+                <td>
+                    <% if(v.blogstatus){ %>
+                        <a href="/blog/changeStatusTrue/?catId=<%= v.id %>&status=true" class="btn btn-success">Active</a>
+                    <% } else{ %>
+                        <a href="/blog/changeStatusFalse/?catId=<%= v.id %>&status=false" class="btn btn-danger">Dactive</a>
+                    <% } %>
+                </td>
+                <!-- <td><%= v.blogdate %></td> -->
+                <td>
+                    <a href="/blog/deletedata/<%= v.id %>" class="btn btn-danger" style="margin-bottom: 5px;">Delete</a> 
+                    <a href="/blog/updatedata/?blogid=<%= v.id %>" class="btn btn-success">Update</a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</form>
+    <div class="pagination">
+        <% if (parseInt(page) > 0) { %>
+            <a href="view_blog?page=<%= parseInt(page) - 1 %>">
+                <button>Previous</button>
+            </a>
+        <% } else { %>
+            <button disabled>Previous</button>
+        <% } %>
+        
+        <% for (var i = 0; i < totalcount; i++) { %>
+            <a href="?page=<%= i %>" style="text-decoration: none;">
+                <button><%= i + 1 %></button>
+            </a>
+        <% } %>
+        
+        <% if (parseInt(page) < totalcount - 1) { %>
+            <a href="view_blog?page=<%= parseInt(page) + 1 %>">
+                <button>Next</button>
+            </a>
+        <% } else { %>
+            <button disabled>Next</button>
+        <% } %>
+    </div>
+</body>
+</div>
+<!--end::Container-->
+<!-- </div> -->
+<!--end::App Content-->
+</main>
+<!--end::App Main-->
+<!--begin::Footer-->
+
+
+<%- include('../footer') %>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+
+    // butten
+
+    $("#deleteAll").hide();
+
+    $("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+    $("#deleteAll").toggle();
+    });
+</script>

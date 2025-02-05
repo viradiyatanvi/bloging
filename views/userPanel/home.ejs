@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home Page</title>
+    <link rel="stylesheet" href="/assets/users/" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<style>
+
+    :root {
+        --primary-color: rgba(255, 68, 0, 0.679);
+        --hover-color: rgba(255, 68, 0, 0.805);
+        --background-color: #f9f9f9;
+        --text-color: #333;
+        --light-color: #fff;
+        --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        margin: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        padding: 0;
+    }
+
+    /* Header */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--primary-color);
+        color: var(--light-color);
+        padding: 0 20px;
+        box-shadow: var(--box-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: var(--light-color);
+        font-size: 1em;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #FFD700;
+    }
+
+    /* SearchBar */
+    .search-bar input[type="text"] {
+        padding: 8px 12px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 200px;
+        transition: border-color 0.3s ease;
+    }
+
+    .search-bar input[type="text"]:focus {
+        outline: none;
+        background-color: var(--primary-color);
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+    }
+
+    .search-bar button {
+        padding: 8px 16px;
+        font-size: 1em;
+        color: var(--light-color);
+        background-color: var(--primary-color);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .search-bar button:hover {
+        background-color: var(--hover-color);
+    }
+
+    /* Container */
+    .container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 20px auto;
+    }
+
+    .container ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 30%;
+        background-color: var(--light-color);
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: var(--box-shadow);
+        height: 100%;
+        overflow-y: auto; 
+    }
+
+    .container ul h2 {
+        background-color: var(--primary-color);
+        color: var(--light-color);
+        padding: 12px;
+        margin: 0;
+        text-align: center;
+        border-radius: 5px 5px 0 0;
+        font-size: 1.2em;
+    }
+
+    .container ul li {
+        padding: 12px 15px;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container ul li:last-child {
+        border-bottom: none;
+    }
+
+    .container ul li:hover {
+        background-color: #f0f8ff;
+        color: var(--hover-color);
+    }
+
+    .container > div {
+        width: 70%;
+        background-color: var(--light-color);
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: var(--box-shadow);
+    }
+
+    .container > div h4 {
+        font-size:18px;
+        line-height: 30px;
+        margin: 10px 0;
+        color: var(--primary-color);
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .container > div h4:hover {
+        color: var(--hover-color);
+    }
+
+    .container > div p {
+        font-size: 1.0em;
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+
+    img {
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Blog Image */
+    .BLOGIMG {
+        margin-right: 20px;
+        padding: 5px;
+        box-shadow: 0px 0px 20px -0px rgb(242, 203, 190);
+        border-radius: 10px;
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .pagination button {
+        padding: 8px 16px;
+        display: flex;
+        background-color: var(--primary-color);
+        color: var(--light-color);
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .pagination button:hover {
+        background-color: var(--hover-color);
+    }
+
+    .pagination button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    /* sorting */
+
+    .sorting-form {
+        display: flex;
+        align-items: center;
+        gap: 10px; 
+        margin: 20px 0;
+    }
+
+    .sorting-form select {
+        padding: 8px 12px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .sorting-form select:focus {
+        outline: none;
+        border-color: rgba(255, 68, 0, 0.584); 
+        box-shadow: 0 0 4px rgba(255, 68, 0, 0.584);
+    }
+
+    .sorting-form button {
+        padding: 8px 16px;
+        font-size: 1em;
+        color: white;
+        background-color: rgba(255, 68, 0, 0.584);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .sorting-form button:hover {
+        background-color: rgba(255, 68, 0, 0.805); 
+    }
+    .categoryids{
+        text-decoration: none;
+        color: black;
+    }
+    .categoryids:hover{
+        color:var(--hover-color);
+    }
+
+
+</style>
+
+<body>
+
+  <header>
+    <div class="logo"><img src="/users/img/img-logo.png" width="80px" height="50px" alt=""></div>
+    <nav>
+        
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <% if(locals.admindata){ %>
+                <% locals.admindata.username %>
+            <% } else { %>
+            <li><a href="/userLogin">Login</a></li>
+            <% } %>
+
+            <% if(locals.admindata){ %>
+                <li><a href="/userlogout">Logout</a></li>
+            <% } else { %>
+                <li><a href="/userRegister">Register</a></li>
+            <% } %>
+        </ul>
+
+
+        <form class="sorting-form">
+            <input type="hidden" name="catId" value="<%= catId %>">
+            <select name="sorting" id="sorting">
+                <option value="">--sorting--</option>
+                <option value="Asc">Ascending</option>
+                <option value="Desc">Descending</option>
+            </select>
+            <button type="submit">Sort</button>
+        </form>
+
+
+        <div class="search-bar">
+            <form action="" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0;">
+                <input type="text" name="search" placeholder="Search..." style="padding: 10px; width: 250px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="submit" value="Search" style="padding: 10px 20px; background-color: rgba(255, 68, 0, 0.584); color: white; border: none; border-radius: 4px; cursor: pointer;">
+                <a href="/">
+                    <button type="button" style="padding: 10px 20px; background-color: rgba(255, 68, 0, 0.584); color: white; border: none; border-radius: 4px; cursor: pointer;">Reset</button>
+                </a>
+              </form>
+        </div>
+    </nav>
+</header>
+
+      <div class="container">
+        <ul>
+            <h2>Category</h2>
+            <li><a class="categoryids" href="/">All <span style="color: var(--primary-color);">(<%= findBlogId %>)</span></a></li>
+            <% categoryAll.map((v,i)=>{ %>
+                <li><a class="categoryids" href="/?catId=<%= v.id %>&sorting=<%= sorting %>"><%= v.categoryname %> <span style="color: var(--primary-color);">(<%= v.blogid.length %>)</span></a></li>
+            <% }) %>
+        </ul>
+          <div>
+              <% blogall.map((v,i)=>{ %>
+                <div class="allblogImg" style="display: flex;justify-content: space-between;align-items: center;margin-bottom: 10px;">
+                    <div class="BLOGIMG">
+                        <img src="<%= v.image %>" width="150px" height="200px" alt="">
+                    </div>
+                     <div>
+                        <h4><%= v.title %></h4>
+                        <hr>
+                     
+                     <p><%- v.discription.substr(0,150) %>...<a href="/readMore/<%= v.id %>">Read More</a></p>
+                     
+                     </div>
+                     
+                </div>
+              <% }) %>
+          </div>
+      </div>
+
+      <div class="pagination">
+        <% if (parseInt(page) > 0) { %>
+            <a href="/?page=<%= parseInt(page) - 1 %>" style="text-decoration: none;">
+                <button>Previous</button>
+            </a>
+        <% } else { %>
+            <button disabled>Previous</button>
+        <% } %>
+
+        <% for (var i = 0; i < totalCount; i++) { %>
+            <a href="?page=<%= i %>" style="text-decoration: none;">
+                <button><%= i + 1 %></button>
+            </a>
+        <% } %>
+        
+        <% if (parseInt(page) < totalCount - 1) { %>
+            <a href="/?page=<%= parseInt(page) + 1 %>" style="text-decoration: none;">
+                <button>Next</button>
+            </a>
+        <% } else { %>
+            <button disabled>Next</button>
+        <% } %>
+    </div>
+
+      
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</html>

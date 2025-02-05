@@ -1,0 +1,241 @@
+<%- include('header') %>
+
+
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Admin Form</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Admin Form</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row g-4">
+              <!--begin::Col-->
+              
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6">
+                <!--begin::Quick Example-->
+                <div class="card card-primary card-outline mb-4">
+                  <!--begin::Header-->
+                  <div class="card-header"><div class="card-title">Admin Form</div></div>
+                  
+                  <!--end::Header-->
+                  <!--begin::Form-->
+                  <form action="insertadmin" method="post" enctype="multipart/form-data">
+                    <!--begin::Body-->
+                    <div class="card-body">
+
+                      <!-- fname -->
+                      <div class="col-md-6">
+                        <label for="validationCustom01" class="form-label">First name :</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="validationCustom01"
+                          name="fname"
+                          value="<% if(old && old.fname){ %><%= old.fname %><% } %>"
+                        />
+                        <% if(errorsData && errorsData.fname){ %>
+                          <span style="color: red;"><%= errorsData.fname.msg %></span>
+                        <% } %>
+                        <div class="valid-feedback">Looks good!</div>
+                      </div>
+
+                      <!-- lname -->
+                      <div class="col-md-6">
+                        <label for="validationCustom02" class="form-label">Last name :</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="validationCustom02"
+                          name="lname"
+                          value="<% if(old && old.lname){ %><%= old.lname %><% } %>"
+                        />
+                        <% if(errorsData && errorsData.lname){ %>
+                          <span style="color: red;"><%= errorsData.lname.msg %></span>
+                        <% } %>
+                        <div class="valid-feedback">Looks good!</div>
+                      </div>
+
+                     
+
+                      <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address:</label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          name="email"
+                          aria-describedby="emailHelp"
+                          value="<% if(old && old.email){ %><%= old.email %><% } %>"
+                        />
+                        <% if(errorsData && errorsData.email){ %>
+                          <span style="color: red;"><%= errorsData.email.msg %></span>
+                        <% } %>
+                        <div id="emailHelp" class="form-text">
+                          We'll never share your email with anyone else.
+                        </div>
+                      </div>
+
+                      <!-- password -->
+
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password :</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" 
+                        value="<% if(old && old.password){ %><%= old.password %><% } %>"/>
+                        <% if(errorsData && errorsData.password){ %>
+                          <span style="color: red;"><%= errorsData.password.msg %></span>
+                        <% } %>
+                      </div>
+
+                       <!-- gender -->
+                       <fieldset class="row mb-3">
+                        <legend class="col-form-label col-sm-2 pt-0">gender:</legend>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gender"
+                              id="gridRadios1"
+                              value="male"
+                              <% if(old && old.gender){ 
+                                if(old.gender == 'male'){ %>
+                                  <%= 'checked' %>
+                                <% }} %>
+                            />
+                            <label class="form-check-label" for="gridRadios1">male</label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gender"
+                              id="gridRadios2"
+                              value="female"
+                              <% if(old && old.gender){
+                                if(old.gender == 'female'){  %>
+                                  <%= 'checked' %>
+                               <% }} %>
+                            />
+                            <label class="form-check-label" for="gridRadios2">female</label>
+                          </div>
+                          <% if(errorsData && errorsData.gender){ %>
+                            <span style="color: red;"><%= errorsData.gender.msg %></span>
+                          <% } %>
+                        </div>
+                      </fieldset>
+                      
+                      <!-- hobby -->
+                      <div class="mb-3"></div>
+                      <label for="exampleInputEmail1" class="form-label">Hobby :</label>
+                        <div class=" form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="hobby" value="reading" 
+                          <% if(old && old.hobby){if(old.hobby.includes('reading')){ %>
+                            <%= 'checked' %>
+                          <% }} %>
+                           />
+                          <label class="form-check-label" for="exampleCheck1">reading</label>
+                        </div>
+                        <div class=" form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="hobby" value="playing" 
+                          <% if(old && old.hobby){if(old.hobby.includes('playing')){ %>
+                            <%= 'checked' %>
+                          <% }} %>
+                          />
+                          <label class="form-check-label" for="exampleCheck1">playing</label>
+                        </div>
+                        <div class=" form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" name="hobby" value="coding" 
+                          <% if(old && old.hobby){if(old.hobby.includes('coding')){ %>
+                            <%= 'checked' %>
+                          <% }} %>
+                          />
+                          <label class="form-check-label" for="exampleCheck1">coding</label>
+                        </div>
+                        <% if(errorsData && errorsData.hobby){ %>
+                          <span style="color: red;"><%= errorsData.hobby.msg %></span>
+                        <% } %>
+                      </div>
+
+                      <!-- selectcity -->
+                      <div class="col-md-6 form-label" style="margin-left: 15px;">
+                        <% var states=['gujarat','goa','panjab']; %>
+                        <label for="validationCustom04" class="form-label">Select State :</label>
+                        <select class="form-select" id="validationCustom04" name="state">
+                          <option selected disabled value="">...</option>
+                          <% states.map((v,i)=>{ %> 
+                            <option value="<%= v %>"
+                              <% if(old && old.state){ if(old.state==v){ %>
+                                <%= 'selected' %>
+                              <% }} %>
+                              ><%= v %></option>
+                          <% }) %>
+                        </select>
+                        <% if(errorsData && errorsData.state){ %>
+                          <span style="color: red;"><%= errorsData.state.msg %></span>
+                        <% } %>
+                      </div>
+
+                      <!-- img -->
+                      <div class="input-group mb-3">
+                        <input type="file" class="form-control" id="inputGroupFile02" name="image"/>
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                      </div>
+
+        
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+
+                    </div>
+                    <!--end::Body-->
+                    <!--begin::Footer-->
+                    
+                    <!--end::Footer-->
+                  </form>
+                  <!--end::Form-->
+                </div>
+                <!--end::Quick Example-->
+                
+                <!--end::Input Group-->
+                <!--begin::Horizontal Form-->
+               
+                <!--end::Horizontal Form-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              
+              <!--end::Col-->
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+      <!--begin::Footer-->
+      
+
+<%- include('footer') %>

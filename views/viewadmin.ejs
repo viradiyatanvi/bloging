@@ -1,0 +1,224 @@
+<%- include('header') %>
+
+<style>
+  .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            margin: 0 5px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .pagination a {
+            text-decoration: none;
+        }
+
+        /* sorting */
+
+       .sorting-form {
+        display: flex;
+        align-items: center;
+        gap: 10px; 
+        margin: 20px 0;
+    }
+
+    .sorting-form select {
+        padding: 8px 12px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+
+    .sorting-form button {
+        padding: 8px 16px;
+        font-size: 1em;
+        color: white;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .sorting-form button:hover {
+        background-color: #034b97; 
+    }
+
+</style>
+      <!--end::Sidebar-->
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div cl ass="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Simple Tables</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <!-- <div class="app-content"> -->
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <!-- <div class="row"> -->
+              <!-- <div class="col-md-6"> -->
+                <!-- <div class="card mb-4"> -->
+                  <!-- <div class="card-header"><h3 class="card-title">Bordered Table</h3></div> -->
+                  <!-- /.card-header -->
+                  <!-- <div class="card-body"> -->
+                    <form action="" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0;">
+                      <input type="text" name="search" placeholder="Search blog by title or author" style="padding: 10px; width: 250px; border: 1px solid #ccc; border-radius: 4px;">
+                      <input type="submit" value="Search" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                      <a href="/viewadmin">
+                          <button type="button" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">Reset</button>
+                      </a>
+                    </form>
+                  
+                    <form class="sorting-form" action="/sorting" method="get">
+                      <select name="sorting" id="sorting">
+                          <option value="">--sorting--</option>
+                          <option value="Asc">Ascending</option>
+                          <option value="Desc">Descending</option>
+                      </select>
+                      <button type="submit">Sort</button>
+                  </form>
+
+                    <form action="/deleteMultipleDelete" method="post">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">
+                            <input type="checkbox" id="checkAll">
+                            <button type="submit" id="deleteAll" style="border: none;"><i class="bi bi-trash3 btn btn-danger" style="border: none;"></i></button>
+                        </th>
+                          <th scope="col">No</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">email</th>
+                          <th scope="col">gender</th>
+                          <th scope="col">hobby</th>
+                          <th scope="col">state</th>
+                          <th scope="col">image</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <% viewadmin.map((v,i)=>{ %>
+                            <tr>
+                              <td>
+                                <input type="checkbox" name="Ids" value="<%= v.id %>">
+                            </td>
+                              <td><%= i=i+1 %></td>
+                                <td><%= v.name %></td>
+                                <td><%= v.email %></td>
+                                <td><%= v.gender %></td>
+                                <td><%= v.hobby %></td>
+                                <td><%= v.state %></td>
+                                <td><img src="<%= v.image %>" width="100px" height="100px" alt=""></td>
+                                <td>
+                                    <a href="/deletedata/?id=<%= v.id %>" class="btn btn-danger">Delete</a> 
+                                    
+                                    <a href="/updatedata/<%= v.id %>" class="btn btn-success">Edit</a> 
+                                </td>
+                              </tr>
+                        <% }) %>
+                        
+                      </tbody>
+                    </table>
+                  </form>
+
+                  <div class="pagination">
+                    <% if (parseInt(page) > 0) { %>
+                        <a href="/viewadmin?page=<%= parseInt(page) - 1 %>">
+                            <button>Previous</button>
+                        </a>
+                    <% } else { %>
+                        <button disabled>Previous</button>
+                    <% } %>
+            
+                    <% for (var i = 0; i < totalCount; i++) { %>
+                        <a href="?page=<%= i %>">
+                            <button><%= i + 1 %></button>
+                        </a>
+                    <% } %>
+                    
+                    <% if (parseInt(page) < totalCount - 1) { %>
+                        <a href="/viewadmin?page=<%= parseInt(page) + 1 %>">
+                            <button>Next</button>
+                        </a>
+                    <% } else { %>
+                        <button disabled>Next</button>
+                    <% } %>
+                </div>
+                
+                  <!-- </div> -->
+                  <!-- /.card-body -->
+                  <!-- <div class="card-footer clearfix">
+                    <ul class="pagination pagination-sm m-0 float-end">
+                      <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                    </ul>
+                  </div> -->
+                <!-- </div> -->
+                <!-- /.card -->
+                
+                <!-- /.card -->
+              <!-- </div> -->
+              <!-- /.col -->
+              
+              <!-- /.col -->
+            <!-- </div> -->
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        <!-- </div> -->
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+      <!--begin::Footer-->
+      
+
+<%- include('footer') %>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+
+    // butten
+
+    $("#deleteAll").hide();
+
+    $("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+    $("#deleteAll").toggle();
+    });
+</script>

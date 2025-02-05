@@ -1,0 +1,65 @@
+<%- include('header') %>
+
+<style>
+    .userlogin {
+  width: 30%;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.userlogin h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input[type="email"],
+.input-group input[type="password"] {
+  height: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
+.btn-primary {
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  background-color: rgba(255, 68, 0, 0.679);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: rgba(255, 68, 0, 0.805);
+}
+</style>
+
+    <form action="/userlogindata" method="post" align="center" class="userlogin">
+        <h1>Login Page</h1>
+
+        <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" name="email" required />
+            <div class="input-group-text"><span class="bi bi-envelope"></span></div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" name="password" required />
+            <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>

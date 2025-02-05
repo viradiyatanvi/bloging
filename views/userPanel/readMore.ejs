@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details Page</title>
+</head>
+
+<style>
+    /* Root Variables */
+    :root {
+        --primary-color: rgba(255, 68, 0, 0.679);
+        --hover-color: rgba(255, 68, 0, 0.805);
+        --background-color: #f9f9f9;
+        --text-color: #333;
+        --light-color: #fff;
+        --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        --border-radius: 8px;
+    }
+
+    /* Global Reset */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--primary-color);
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: var(--hover-color);
+    }
+
+    h1 {
+        font-size: 2em;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    /* Header Styles */
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background-color: var(--primary-color);
+        color: var(--light-color);
+        box-shadow: var(--box-shadow);
+    }
+
+    /* Logo */
+    .logo img {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--border-radius);
+    }
+
+    /* Navigation */
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 20px;
+    }
+
+    nav ul li a {
+        color: var(--light-color);
+        font-weight: 600;
+        padding: 5px 10px;
+        border-radius: var(--border-radius);
+        transition: background-color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        background-color: var(--hover-color);
+    }
+
+    /* Sorting Form and Search Bar */
+    .sorting-form,
+    .search-bar {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .sorting-form select,
+    .search-bar input[type="text"] {
+        padding: 8px 12px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: var(--border-radius);
+        transition: border-color 0.3s ease;
+    }
+
+    .sorting-form select:focus,
+    .search-bar input[type="text"]:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 6px var(--primary-color);
+    }
+
+    .sorting-form button,
+    .search-bar input[type="submit"],
+    .search-bar button {
+        padding: 8px 16px;
+        font-size: 1em;
+        background-color: var(--primary-color);
+        color: var(--light-color);
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .sorting-form button:hover,
+    .search-bar input[type="submit"]:hover,
+    .search-bar button:hover {
+        background-color: var(--hover-color);
+    }
+
+    /* Container */
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        display: flex;
+        gap: 20px;
+    }
+
+    #w-2{
+        background-color: var(--light-color);
+        box-shadow: var(--box-shadow);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        width: 48%;
+    }
+
+    .w-2 {
+        /* background-color: var(--light-color); */
+        /* box-shadow: var(--box-shadow); */
+        /* border-radius: var(--border-radius); */
+        padding: 20px;
+        height: 100%;
+        width: 48%;
+    }
+
+    /* Blog Section */
+    .allblogImg {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-bottom: 20px;
+        /* padding: 10px; */
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .allblogImg:hover {
+        background-color: #f3f3f3;
+        transform: scale(1.02);
+    }
+
+    .BLOGIMG img {
+        width: 50px;
+        height: 50px;
+        border-radius: var(--border-radius);
+        object-fit: cover;
+    }
+
+    .allblogImg h3 {
+        margin: 0;
+        /* color: var(--primary-color);s */
+        font-size: 16px;
+    }
+
+    .allblogImg a {
+        display: inline-block;
+        margin-top: 5px;
+        font-size: 1em;
+        font-weight: 600;
+    }  
+
+    .userImg {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: contain;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;   
+        border-radius: 10px;
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .pagination button {
+        padding: 8px 16px;
+        background-color: var(--primary-color);
+        color: var(--light-color);
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .pagination button:hover {
+        background-color: var(--hover-color);
+    }
+
+    .pagination button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+
+    .comment-section {
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 700px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form */
+    .comment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
+    }
+
+    .comment-form input[type="text"],
+    .comment-form input[type="email"],
+    .comment-form textarea,
+    .comment-form input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .comment-form textarea {
+        resize: vertical;
+        height: 20px;
+    }
+
+    .comment-form input[type="submit"] {
+        padding: 8px 15px;
+        font-size: 16px; 
+        width: 200px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease; 
+    }
+
+    .comment-form input[type="submit"]:hover {
+        background-color: var(--primary-color);
+    }
+
+    /* Comment list */
+    .comment {
+    display: flex; 
+    align-items: flex-start;
+    gap: 20px; 
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment img {
+    /* max-width: 120px;  */
+    /* height: auto; */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 0; 
+    object-fit: cover; 
+}
+
+.comment-content {
+    flex: 1; 
+}
+
+.comment-content h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.comment-content p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+     
+
+    
+</style>
+
+<body>
+    <header>
+        <div class="logo"><img src="/users/img/img-logo.png" width="80px" height="50px" alt="Logo"></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <% if(locals.admindata){ %>
+                    <% locals.admindata.username %>
+                <% } else { %>
+                <li><a href="/userLogin">Login</a></li>
+                <% } %>
+
+                <% if(locals.admindata){ %>
+                    <li><a href="/userlogout">Logout</a></li>
+                <% } else { %>
+                    <li><a href="/userRegister">Register</a></li>
+                <% } %>
+            </ul>
+
+            <form class="sorting-form" action="/sortings" method="get">
+                <select name="sortings" id="sortings">
+                    <option value="">--sorting--</option>
+                    <option value="Asc">Ascending</option>
+                    <option value="Desc">Descending</option>
+                </select>
+                <button type="submit">Sort</button>
+            </form>
+
+            <div class="search-bar">
+                <form action="" style="display: flex; align-items: center; gap: 10px; margin: 20px 0;">
+                    <input type="text" name="search" placeholder="Search...">
+                    <input type="submit" value="Search">
+                    <a href="/"><button type="button">Back</button></a>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <h1>User Details</h1>   
+    <div class="container">
+        <div class="w-2" id="w-2">
+            <img src="<%= UserDetails.image %>" class="userImg"  alt="User Image">
+            <h3><%= UserDetails.title %></h3>
+            <p><%- UserDetails.discription %></p>
+        </div>
+    
+
+        <div class="w-2">
+            <% blogall.map((v,i)=>{ %>
+                <div class="allblogImg">
+                    <div class="BLOGIMG">
+                        <img src="<%= v.image %>" width="100px" height="100px" alt="Blog Image">
+                    </div>
+                    <div>
+                        <h3><%= v.title.substr(0,50) %>...</h3>
+                        <a href="/readMore/<%= v.id %>">Read More</a>
+                    </div>
+                </div>
+            <% }) %>
+
+            <div class="comment-section">
+                <!-- Comment Form -->
+                <form class="comment-form" action="/insertComment" method="post" enctype="multipart/form-data">
+                    <h3 style="text-align: center;color: rgba(255, 68, 0, 0.744);">Add Comment</h3>
+                    <input type="hidden" name="PostId" value="<%= PostId %>">
+                    <input type="text" name="name" placeholder="Enter your name" required>
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <textarea name="comment" placeholder="Write your comment" required></textarea>
+                    <input type="file" name="image">
+                    <% if(locals.user) { %>
+                        <input type="submit" value="Submit Comment">
+                    <% } else { %>
+                        <a href="/userLogin"><input type="button" value="Submit Comment" style="background-color: rgba(255, 68, 0, 0.744);padding: 8px;color: white;border: none;border-radius: 10px;"></a>
+                    <% } %>
+                </form>
+            
+                <!-- Comment List -->
+                <div class="comment-list">
+                    <% viewCommentpage.map((v, i) => { %>
+                        <div class="comment">
+                            <img src="<%= v.image %>" height="100px" width="100px" alt="Comment Image">
+                            <div class="comment-content">
+                                <h2><%= v.name %></h2>
+                                <p>Email: <%= v.email %></p>
+                                <p>Comment: <%= v.comment %></p>
+                                <a href="/setuserlike/<%= v.id %>">likes(<%= v.likes.length %>)</a>
+                                ||
+                                <a href="/setuserdislike/<%= v.id %>">dislikes(<%= v.dislikes.length %>)</a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+    </div>
+    
+</body>
+</html>
