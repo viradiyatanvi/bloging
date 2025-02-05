@@ -1,7 +1,7 @@
 const express=require('express');
 const path=require('path');
 
-const port=8001;
+const port=8000;
 
 const app=express();
 
@@ -9,13 +9,14 @@ const app=express();
 
 
 const mongoose=require('mongoose');
-mongoose.connect("mongodb+srv://viradiyatanvi028:UPsbqZOcMIvE8vEB@cluster0.sk3ly.mongodb.net/adminpanelsetup?retryWrites=true&w=majority&appName=Cluster0").then((res)=>{
-    console.log("db is connected");
+mongoose.connect("mongodb+srv://tanviViradiya28:Tanvi123@cluster0.sk3ly.mongodb.net/adminpanelsetup", {
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true
 })
-.catch((err)=>{
-    console.log(err);
-})
+.then(() => console.log("DB is connected"))
+.catch((err) => console.log(err));
 
+// mongodb+srv://tanviViradiya28:<db_password>@cluster0.sk3ly.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 const cookieparser=require('cookie-parser');
 
 const flash=require('connect-flash');
