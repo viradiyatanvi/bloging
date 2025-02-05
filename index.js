@@ -7,7 +7,6 @@ const app=express();
 
 // const db=require('./config/mongoose');
 
-
 const mongoose=require('mongoose');
 mongoose.connect("mongodb+srv://tanviViradiya28:Tanvi123@cluster0.sk3ly.mongodb.net/adminpanelsetup", {
     // useNewUrlParser: true,
@@ -16,7 +15,6 @@ mongoose.connect("mongodb+srv://tanviViradiya28:Tanvi123@cluster0.sk3ly.mongodb.
 .then(() => console.log("DB is connected"))
 .catch((err) => console.log(err));
 
-// mongodb+srv://tanviViradiya28:<db_password>@cluster0.sk3ly.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 const cookieparser=require('cookie-parser');
 
 const flash=require('connect-flash');
