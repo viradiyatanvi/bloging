@@ -328,10 +328,11 @@ module.exports.userregisterdata = async (req, res) => {
             return res.redirect('back');
         }
     } catch (err) {
-        console.log(err);
+        console.error("Error in userregisterdata:", err);
         return res.redirect('back');
     }
 };
+
 
 
 module.exports.userLogin=async(req,res)=>{

@@ -13,14 +13,14 @@ routes.get('/',userCtl.home);
 // register
 
 routes.get('/userRegister',userCtl.userRegister);
-
-routes.post('/userregisterdata',userCtl.userregisterdata);
-
-routes.get('/userLogin',userCtl.userLogin);
-
-routes.post('/userlogindata',passport.authenticate('userAuth',{failureRedirect:'/userLogin',failureMessage:"invelid email"}),userCtl.userlogindata);
-
-routes.get('/userlogout',userCtl.userlogout);
+routes.get('/userRegister', userCtl.userRegister);
+routes.post('/userregisterdata', userCtl.userregisterdata);
+routes.get('/userLogin', userCtl.userLogin);
+routes.post('/userlogindata', passport.authenticate('userAuth', {
+    failureRedirect: '/userLogin',
+    failureMessage: "Invalid email"
+}), userCtl.userlogindata);
+routes.get('/userlogout', userCtl.userlogout);
 
 // likes
 
