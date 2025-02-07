@@ -9,8 +9,8 @@ const app=express();
 
 const mongoose=require('mongoose');
 mongoose.connect("mongodb+srv://tanviViradiya28:Tanvi123@cluster0.sk3ly.mongodb.net/adminpanelsetup", {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true 
+    // useNewUrlParser: true, 
+    // useUnifiedTopology: true 
 })
 .then(() => console.log("DB is connected"))
 .catch((err) => console.log(err));
