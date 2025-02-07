@@ -8,7 +8,15 @@ const app=express();
 // const db=require('./config/mongoose');
 
 const mongoose=require('mongoose');
-mongoose.connect("mongodb+srv://tanviViradiya28:Tanvi123@cluster0.sk3ly.mongodb.net/adminpanelsetup", {
+// mongoose.connect("mongodb+srv://tanviViradiya28:Tanvi123@cluster0.sk3ly.mongodb.net/adminpanelsetup", {
+//     // useNewUrlParser: true, 
+//     // useUnifiedTopology: true 
+// })
+// .then(() => console.log("DB is connected"))
+// .catch((err) => console.log(err));
+
+
+mongoose.connect("mongodb+srv://viradiya028:WxBWZ7JrHvo3Om08@cluster0.daqgr.mongodb.net/adminpanelsetup", {
     // useNewUrlParser: true, 
     // useUnifiedTopology: true 
 })
