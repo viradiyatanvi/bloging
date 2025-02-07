@@ -304,7 +304,7 @@ module.exports.changeStatusFalse=async(req,res)=>{
 
 module.exports.userRegister=async(req,res)=>{
     try{
-        return res.render('userpanel/userRegister')
+        return res.render('userPanel/userRegister')
     }
     catch(err){
         console.log(err);
@@ -336,7 +336,7 @@ module.exports.userregisterdata = async (req, res) => {
 
 module.exports.userLogin=async(req,res)=>{
     try{
-        return res.render('userpanel/userLogin')
+        return res.render('userPanel/userLogin')
     }
     catch(err){
         console.log(err);
