@@ -17,9 +17,6 @@ mongoose.connect("mongodb+srv://viradiya028:WxBWZ7JrHvo3Om08@cluster0.daqgr.mong
 .then(() => console.log("DB is connected"))
 .catch((err) => console.log(err));
 
-app.set('view engine','ejs');
-app.set('views',path.join(__dirname,'views'));
-
 const cookieparser=require('cookie-parser');
 
 const flash=require('connect-flash');
@@ -30,13 +27,12 @@ const passport=require('passport');
 const LocalStrategy=require('./config/passport-Local');
 
 
-
 app.use(cookieparser());
 
 app.use(express.urlencoded());
 
-// app.set('view engine','ejs');
-// app.set('views',path.join(__dirname,'views'));
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname,'views'));
 
 app.use('/uploads/admin',express.static(path.join(__dirname,'uploads/admin')));
 app.use('/uploads/comment',express.static(path.join(__dirname,'uploads/comment')));

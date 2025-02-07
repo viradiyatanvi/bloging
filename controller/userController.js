@@ -314,24 +314,22 @@ module.exports.userRegister=async(req,res)=>{
 
 module.exports.userregisterdata = async (req, res) => {
     try {
-        if (req.body.password !== req.body.confirmpassword) {
+        if (req.body.password == req.body.confirmpassword) {
+            let userData = await User.create(req.body);
+            if (userData) {
+                console.log("Data added successfully");
+                return res.redirect('/userLogin');
+            } else {
+                console.log("Data not added");
+                return res.redirect('back');
+            }
+        } else {
             console.log("Passwords do not match");
             return res.redirect('back');
         }
-
-        let newUser = new User({
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password
-        });
-
-        await newUser.save();
-        console.log("User registered successfully");
-        return res.redirect('/userLogin');
-
     } catch (err) {
-        console.error("🔥 Error in user registration:", err);
-        return res.status(500).send("Internal Server Error: " + err.message);
+        console.log(err);
+        return res.redirect('back');
     }
 };
 
