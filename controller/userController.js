@@ -336,8 +336,6 @@ module.exports.userregisterdata = async (req, res) => {
 };
 
 
-
-
 module.exports.userLogin=async(req,res)=>{
     try{
         return res.render('userpanel/userLogin')

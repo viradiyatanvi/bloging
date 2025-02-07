@@ -8,12 +8,6 @@ const app=express();
 // const db=require('./config/mongoose');
 
 const mongoose=require('mongoose');
-// mongoose.connect("mongodb+srv://tanviViradiya28:Tanvi123@cluster0.sk3ly.mongodb.net/adminpanelsetup", {
-//     // useNewUrlParser: true, 
-//     // useUnifiedTopology: true 
-// })
-// .then(() => console.log("DB is connected"))
-// .catch((err) => console.log(err));
 
 
 mongoose.connect("mongodb+srv://viradiya028:WxBWZ7JrHvo3Om08@cluster0.daqgr.mongodb.net/adminpanelsetup", {
@@ -22,6 +16,9 @@ mongoose.connect("mongodb+srv://viradiya028:WxBWZ7JrHvo3Om08@cluster0.daqgr.mong
 })
 .then(() => console.log("DB is connected"))
 .catch((err) => console.log(err));
+
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname,'views'));
 
 const cookieparser=require('cookie-parser');
 
@@ -38,8 +35,8 @@ app.use(cookieparser());
 
 app.use(express.urlencoded());
 
-app.set('view engine','ejs');
-app.set('views',path.join(__dirname,'views'));
+// app.set('view engine','ejs');
+// app.set('views',path.join(__dirname,'views'));
 
 app.use('/uploads/admin',express.static(path.join(__dirname,'uploads/admin')));
 app.use('/uploads/comment',express.static(path.join(__dirname,'uploads/comment')));
