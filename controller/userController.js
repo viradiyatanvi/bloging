@@ -225,20 +225,34 @@ module.exports.insertComment=async(req,res)=>{
     try{
         // console.log(req.body);
         // console.log(req.file);
+        // let commentImage='';
+        // if(req.file){
+        //     commentImage=await Comment.imgPath+'/'+req.file.filename;
+        // }
+        // req.body.image=commentImage;
 
-        let commentImage='';
-        if(req.file){
-            commentImage=await Comment.imgPath+'/'+req.file.filename;
-        }
-        req.body.image=commentImage;
+        let commentImage = '';
+if (req.file) {
+    commentImage = await Comment.imgPath + '/' + req.file.filename;
+}
+req.body.image = commentImage;
 
-        let commentAdd = await Comment.create(req.body);
+
+        // let commentAdd = await Comment.create(req.body);
+        let commentAdd = await Comment.create({
+            name: req.body.name,
+            email: req.body.email,
+            comment: req.body.comment,
+            image: commentImage,
+            PostId: req.body.PostId
+        });
 
         if (commentAdd) {
             let findComment = await Blog.findById(req.body.PostId);
             if (findComment) {
                 findComment.commentId.push(commentAdd._id);
-                await Blog.findByIdAndUpdate(req.body.PostId, findComment);
+                // await Blog.findByIdAndUpdate(req.body.PostId,findComment);
+                await Blog.findByIdAndUpdate(req.body.PostId, { $push: { commentId: commentAdd._id } });
             } else {
                 console.error('Comment not found');
             }

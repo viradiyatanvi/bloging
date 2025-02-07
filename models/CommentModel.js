@@ -5,7 +5,6 @@ const imagePath='/uploads/comment';
 const path=require('path');
 
 const multer=require('multer');
-const { type } = require('os');
 
 const CommentSchema=mongoose.Schema({
     PostId:{

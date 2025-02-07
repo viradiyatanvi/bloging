@@ -34,7 +34,7 @@ routes.get('/readMore/:id',userCtl.readMore);
 
 routes.get('/sortings',userCtl.sortings);
 
-routes.post('/insertComment',Comment.uploadImageFile,userCtl.insertComment);
+routes.post('/insertComment', Comment.uploadImageFile, userCtl.insertComment);
 
 routes.get('/commentView',userCtl.commentView);
 

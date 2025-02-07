@@ -18,7 +18,7 @@ const UserSchema=mongoose.Schema({
         default:true
     },
 },{
-    timeStamp:true
+    timestamps:true
 });
 
 
